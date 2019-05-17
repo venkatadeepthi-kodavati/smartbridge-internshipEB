@@ -2,7 +2,7 @@
  * GccApplication3.c
  *
  * Created: 10-05-2019 09:48:31
- * Author : Hp
+ * Author : Kodavati
  */ 
 #ifndef F_CPU
 #define F_CPU 16000000
