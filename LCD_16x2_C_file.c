@@ -1,19 +1,11 @@
-/*
- * LCD_16x2_C_file.c
- *
- */
-
-
-#include "LCD_16x2_H_file.h"						/* Include LCD header file */
-
-
+#include "LCD_16x2_H_file.h"
 void LCD_Command (char cmd)							/* LCD command write function */
 {
 	PORTC = cmd;
 	PORTD&=~(1<<registerselection)|(1<<rw);
-	PORTD|=1<<enable;
+	PORTD|=(1<<enable);
 	_delay_ms(20);
-	PORTD&=~1<<enable;
+	PORTD&=~(1<<enable);
 	PORTC=0;
 
 }
@@ -24,7 +16,7 @@ void LCD_Char (char char_data)						/* LCD data write function */
 	PORTD|=~(1<<rw);
 	PORTD|=(1<<enable) | (1<<registerselection);
 	_delay_ms(20);
-	PORTD&=~1<<enable;
+	PORTD&=~(1<<enable);
 	PORTC=0;
 
 }
@@ -57,8 +49,8 @@ void LCD_String (char *str)							/* Send string to LCD function */
 void LCD_String_xy (char row, char pos, char *str)	/* Send string to LCD function */
 {
 	if (row == 1)
-		LCD_Command((pos & 0x0F)|0x80);				/* Command of first row and required position<16 */
+	LCD_Command((pos & 0x0F)|0x80);				/* Command of first row and required position<16 */
 	else if (row == 2)
-		LCD_Command((pos & 0x0F)|0xC0);				/* Command of Second row and required position<16 */
+	LCD_Command((pos & 0x0F)|0xC0);				/* Command of Second row and required position<16 */
 	LCD_String(str);								/* Call LCD string function */
 }
